@@ -15,7 +15,7 @@ def gs_factors(tickerId, startDate, endDate):
     auth_data = {
         'grant_type'    : 'client_credentials',
         'client_id'     : '01cb40c6847c405fba0dcb9a505ff87a',
-        'client_secret' : '344aacb34687935e6614d4856047de9efef2cf3d2e9829ef6cdf6b4f5f3249a1',
+        'client_secret' : '7da91ebc0b75187c43c116b5a04dd610dce08e8222bbb2d86b84ca463163ecf8',
         'scope'         : 'read_product_data read_financial_data read_content'
     }
     # create Session instance
@@ -116,6 +116,9 @@ def main():
     gs_df(results)
 
     plot_data_gs(results)
+    if results['financialReturnsScore'][-1] > .6 and results['growthScore'][-1] and results['multipleScore'][-1] and  results['integratedScore'][-1] < .3:
+        print("BUY")
+
 
 
 
