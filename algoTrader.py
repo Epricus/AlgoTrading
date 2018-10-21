@@ -39,7 +39,6 @@ def gs_factors(tickerId, startDate, endDate):
 
     return results
 
-
 def gs_df(aDict):
     alist = aDict['data']
     compiledDict = {}
@@ -68,6 +67,7 @@ def get_bollinger_bands(rm, rstd):
     return upper_band, lower_band
 
 def plot_data_gs(df, title="Stock Data"):
+    plt.figure(1)
     ax = df.plot(title=title, fontsize=12)
     ax.set_xlabel("Date")
     if "Price" in df.columns.values.tolist():
@@ -92,14 +92,6 @@ def get_price_data(tickerId):
 def main():
 
     tickerId = input("What is the ticker ID of the stock you are interested in? ")
-    now = datetime.datetime.now()
-    endDate = str(now)[:10]
-
-    startDate = (datetime.date.today() - datetime.timedelta(6*365/12)).isoformat()
-
-
-
-
 
 
     df = get_price_data(tickerId)
@@ -112,12 +104,11 @@ def main():
     rm.plot(label ='rolling mean', ax= ax)
     lower_band.plot(label="lower band", ax=ax)
     upper_band.plot(label="upper band", ax=ax)
-    plt.show()
-    gs_df(results)
 
-    plot_data_gs(results)
-    if results['financialReturnsScore'][-1] > .6 and results['growthScore'][-1] and results['multipleScore'][-1] and  results['integratedScore'][-1] < .3:
-        print("BUY")
+
+    plot_data_gs(gs_df(gs_factors(tickerId, "2017-01-15", "2018-10-01")))
+
+
 
 
 
